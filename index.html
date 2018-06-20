@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Awesome Balloon Game</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+
+    <style type="text/css">
+
+
+
+    body{
+      background: linear-gradient(to right,blue, white);
+      font-family: 'Berkshire Swash', cursive;
+    }
+
+    h1{
+      color: blue;
+      margin: auto;
+      background-color: yellow;
+      width: 300px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+
+    .balloon{
+      /* stack on top of each other to the bottom */
+
+      position: absolute;
+      bottom: 0;
+    }
+
+    .balloon:hover{
+      cursor: crosshair;
+    }
+
+    .inflatable{
+      width: 180px;
+      height: 200px;
+      background-color: yellow;
+      border-radius: 50%;
+    }
+
+    .string{
+      width: 2px;
+      height: 150px;
+      background-color:black;
+      margin-left: 90px ;
+    }
+
+    .counter{
+      font-size: 250px;
+      color: white;
+      background-color: orange;
+      width: 300px;
+      height: 500px;
+      margin: auto;
+      text-align: center;
+      border: 2px solid yellow;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <h1> Pop the balloons! </h1>
+    <div class="counter"> 0  </div>
+    <div class="balloon">
+      <div class="inflatable"> </div>
+      <div class="string"> </div>
+
+    </div>
+  </body>
+
+
+  <script
+ src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+ <script>
+
+ var balloon = $(".balloon");
+ var colors = ["#3498db","#16a085","#9b59b6","#f1c40f","#badc58","#8c564b","#e377c2","#FF0000","#bcbd22","#FF3366"];
+
+
+ for (var i=0; i<15; i++){
+   var balloon_color
+
+   var balloonCopy = balloon.clone();
+   var counter = 0;
+
+
+   // using jquery to position the balloons; the balloons will appear in a straight line
+
+   balloonCopy.css({
+     left: i * 200
+   });
+
+   balloonCopy.appendTo("body");
+
+   inflatable=balloonCopy.find(".inflatable")
+
+   balloon_color=colors[Math.floor(Math.random() *colors.length)];
+
+   inflatable.css({"background-color":balloon_color});
+
+   balloonCopy.click(function(){
+     console.log('i am being popped!')
+     $(this).remove();
+
+     //comment: increment the counter once a balloon is being removed, manipulating this class (once added to the body) and passing in the value of what function does. we can give it any score value.
+
+     counter = counter + 1;
+     $(".counter").html(counter);
+
+   });
+
+   // make balloons rise. in 8 seconds, it will rise up to the top all the way (100%)
+
+   balloonCopy.animate({bottom: "100%"}, 8000);
+
+  };
+
+  balloon.remove();
+
+
+ </script>
+
+</html>
